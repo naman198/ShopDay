@@ -1,11 +1,14 @@
-const expess = require('express')
-const dotenv = require('dotenv');
-// require('dotenv').config({ path: require('find-config')('.env') })
-// require('dotenv').config({path:'./ShoopingAPP/.env'})
-const products = require('./data/products')
-
+import expess from 'express';
+import dotenv from 'dotenv';
+import connectDB from './config/db.js';
 
 dotenv.config()
+
+connectDB();
+
+import products from './data/products.js'
+
+
 
 const app = expess();
 app.get('/', (req, res)=>{
@@ -24,5 +27,4 @@ app.get('/api/product/:id', (req, res)=>{
 
 const PORT = process.env.REACT_APP_PORT || 4000
 
-console.log(process.env)
 app.listen(PORT, console.log(`Server is in ${process.env.NODE_ENV} mode on ${PORT}`));

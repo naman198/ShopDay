@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Shopday App by Naman",
   "main": "server.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node backend/server",
@@ -13,7 +14,8 @@
   "author": "Naman Goyal",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.3"
+    "express": "^4.17.3",
+    "mongoose": "^6.2.7"
   },
   "devDependencies": {
     "dotenv": "^16.0.0"
