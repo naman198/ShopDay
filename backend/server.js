@@ -1,30 +1,27 @@
 import expess from 'express';
 import dotenv from 'dotenv';
 import connectDB from './config/db.js';
+import productRoutes from "./routes/productRoutes.js";
+import {Not_Found, Error_Handler} from "./middleware/errorMiddleware.js";
 
 dotenv.config()
-
 connectDB();
-
-import products from './data/products.js'
-
 
 
 const app = expess();
+
 app.get('/', (req, res)=>{
     res.send('Apii is running')
-})
+});
 
-app.get('/api/products', (req, res)=>{
-    res.json(products);
-})
+app.use('/api/products', productRoutes);
+// app.use('/api/product', productRoutes);
+
+app.use(Not_Found)
+
+app.use(Error_Handler);
 
 
-app.get('/api/product/:id', (req, res)=>{
-    const prod = products.find(p  => p._id === req.params.id);
-    res.json(prod);
-})
-
-const PORT = process.env.REACT_APP_PORT || 4000
+const PORT = process.env.REACT_APP_PORT || 4000;
 
 app.listen(PORT, console.log(`Server is in ${process.env.NODE_ENV} mode on ${PORT}`));
