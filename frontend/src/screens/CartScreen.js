@@ -23,7 +23,8 @@ const CartScreen = (param) =>
 
     const checkOutHandler = () =>
     {
-        navigation('/login?redirect=shipping');
+        // navigation('/login?redirect=shipping');
+        navigation('/shipping');
     }
     useEffect(() =>{
         if(id)
