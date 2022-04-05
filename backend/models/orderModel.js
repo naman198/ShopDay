@@ -10,7 +10,7 @@ const orderSchema = mongoose.Schema({
         {
             name : {type : String, require : true},
             qty : {type : Number, require : true},
-            imagee : {type : String, require : true},
+            image : {type : String, require : true},
             price : {type : Number, require : true},
             product : {
                 type : mongoose.Schema.Types.ObjectId,
@@ -27,7 +27,7 @@ const orderSchema = mongoose.Schema({
     },
     paymentMethod : {
         type : String,
-        default : true
+        default : "PayPal"
     },
     paymentResult : {
         id : {type : String},
