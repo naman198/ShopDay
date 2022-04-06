@@ -2,6 +2,8 @@ import { raw } from "express";
 import asyncHandler from "express-async-handler";
 import Order from "../models/orderModel.js";
 import User from "../models/userModel.js";
+
+
 //  create new order
 // @oute  POST /api/orsers/
 // access Private
@@ -72,4 +74,17 @@ const updateOrderToPaid = asyncHandler( async (req, res)=>{
         res.status('Order Not found')
     }
 })
-export {addOrderItem , getOrderById, updateOrderToPaid}
+
+
+// Get Logged in user orders
+// @oute  Get /api/orders/myorders
+// access Private
+
+const getMyOrders = asyncHandler( async (req, res)=>{
+    const order = await Order.find({ user : req.user._id});
+    res.json(order);
+    
+})
+
+
+export {addOrderItem , getOrderById, updateOrderToPaid, getMyOrders}

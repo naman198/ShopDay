@@ -1,5 +1,6 @@
-import { USER_LOGIN_REQUEST, USER_LOGIN_SUCCES, USER_LOGIN_FAIL, USER_LOGOUT, USER_REGISTER_REQUEST, USER_REGISTER_SUCCES, USER_REGISTER_FAIL, USER_DETAILS_SUCCES, USER_DETAILS_FAIL, USER_UPDATE_PROFILE_REQUEST, USER_UPDATE_PROFILE_SUCCES, USER_UPDATE_PROFILE_FAIL } from "../constants/userConstants"
+import { USER_LOGIN_REQUEST, USER_LOGIN_SUCCES, USER_LOGIN_FAIL, USER_LOGOUT, USER_REGISTER_REQUEST, USER_REGISTER_SUCCES, USER_REGISTER_FAIL, USER_DETAILS_SUCCES, USER_DETAILS_FAIL, USER_UPDATE_PROFILE_REQUEST, USER_UPDATE_PROFILE_SUCCES, USER_UPDATE_PROFILE_FAIL, USER_DETAILS_RESET } from "../constants/userConstants"
 import axios from "axios";
+import { ORDER_LIST_MY_RESET } from "../constants/orderContants";
 
 export const login = (email, password) => async (dispatch) => {
     try {
@@ -34,6 +35,10 @@ export const logout = () => (dispatch) => {
     dispatch({
         type : USER_LOGOUT
     })
+
+    dispatch({type: USER_DETAILS_RESET});
+    dispatch({type: ORDER_LIST_MY_RESET})
+    
 }
 
 export const register = (name, email, password) => async (dispatch) => {
