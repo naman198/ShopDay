@@ -2,7 +2,6 @@ import asyncHandler from "express-async-handler";
 import User from "../models/userModel.js";
 import generateToken from "../utils/generateToken.js";
 
-
 // @desc  Auth Token & get token
 // @oute / api/users/login
 // access public
@@ -97,7 +96,39 @@ const getUserProfile = asyncHandler( async (req, res)=>
     }
 });
 
+// @desc  get all users
+// @oute / api/users/
+// access private/Admin
 
+const getUsers = asyncHandler( async (req, res)=> 
+{
+    const users = await User.find({});
+    res.json(users);
+
+});
+
+// @desc  Delete a user
+// @oute  /api/users/:id
+// access private/Admin
+
+const deleteUser = asyncHandler( async (req, res)=> 
+{
+    const user = await User.findById(req.params.id);
+
+    console.log(req.params.id);
+    
+    if(user)
+    {
+        await user.remove()
+        res.json({message: 'User Removed'})
+    }
+    else
+    {
+        res.status(404);
+        throw new Error('User Not found')
+    }
+
+});
 
 // @desc  update
 // @oute  PUT /api/users/profile
@@ -132,4 +163,52 @@ const updateUserProfile = asyncHandler( async (req, res)=>
     }
 });
 
-export {authUser, getUserProfile, registerUser, updateUserProfile};
+
+// @desc  get api user id
+// @oute / api/users/
+// access private/Admin
+
+const getUsersByID = asyncHandler( async (req, res)=> 
+{
+    const user = await User.findById(req.params.id).select('-password');
+    if(user)
+        res.json(user);
+    else{
+        res.status(401);
+        throw new Error('user not found')
+    }
+});
+
+
+
+// @desc  update user
+// @oute  PUT /api/users/:id
+// access private/admin
+
+const updateUser = asyncHandler( async (req, res)=> 
+{
+    const user = await User.findById(req.params.id);
+
+    if(user)
+    {
+        user.name = req.body.name || user.name
+        user.email = req.body.email || user.email
+        user.isAdmin = req.body.isAdmin
+        
+        const updateduser = await user.save();
+
+        res.json({
+            _id: updateduser._id,
+            name: updateduser.name,
+            email: updateduser.email,
+            isAdmin: updateduser.isAdmin, 
+        })
+    }
+    else{
+        res.status(401);
+        throw new Error('user not found')
+    }
+});
+
+
+export {authUser, getUserProfile, updateUser, registerUser, getUsersByID ,updateUserProfile, getUsers, deleteUser};

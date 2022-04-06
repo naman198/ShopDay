@@ -1,10 +1,9 @@
 import React, {useState, useEffect, useDebugValue} from 'react'
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, Row, Col  } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import FormContainer from '../Components/FormContainer';
 import { savePaymentMethod } from '../actions/cartActions';
 import { useNavigate } from 'react-router-dom';
-import { Row, Col } from 'react-bootstrap';
 import CheckoutSteps from '../Components/CheckoutSteps';
 
 const PaymentScreen = () => 
@@ -17,6 +16,7 @@ const PaymentScreen = () =>
   {
       navigate('/shipping')
   }
+
   const [paymentMethod, setPaymentMethod] = useState('Paypal');
 
   const dispatch = useDispatch()
@@ -35,19 +35,18 @@ const PaymentScreen = () =>
 
             <Form.Group>
                 <Form.Label as ='legend'> Select Method</Form.Label>
-            
-            <Col>
-                <Form.Check type = 'radio' label ="PayPal or Credit Card" 
-                id = 'PayPal' name = "paymentMethod" value='PayPal' checked 
-                onChange = {(e) => setPaymentMethod(e.target.value)}>
-                </Form.Check>
+                <Col>
+                    <Form.Check type = 'radio' label ="PayPal or Credit Card" 
+                    id = 'PayPal' name = "paymentMethod" value='PayPal' checked 
+                    onChange = {(e) => setPaymentMethod(e.target.value)}>
+                    </Form.Check>
 
-                {/* <Form.Check type = 'radio' label ="Stripe" 
-                id = 'Stripe' name = "paymentMethod" value='Stripe'  
-                onChange = {(e) => setPaymentMethod(e.target.value)}>
-                </Form.Check> */}
-            
-            </Col>
+                    {/* <Form.Check type = 'radio' label ="Stripe" 
+                    id = 'Stripe' name = "paymentMethod" value='Stripe'  
+                    onChange = {(e) => setPaymentMethod(e.target.value)}>
+                    </Form.Check> */}
+                
+                </Col>
             </Form.Group>
 
             <Button type = 'submit' varient = 'primary'> Continue </Button>

@@ -13,6 +13,7 @@ import { ORDER_PAY_RESET } from '../constants/orderContants.js';
 
 
 const OrderScreen = () => {
+
   const Id  = useParams();
   const orderId = Id.id;
   const [sdkReady, setSdkReady] = useState(false)
@@ -34,6 +35,8 @@ const OrderScreen = () => {
   }
 
   useEffect(() => {
+    
+
     const addPayPalScript = async () => {
         const { data: clientId } = await axios.get('/api/config/paypal');
         const script = document.createElement('script');
@@ -43,6 +46,7 @@ const OrderScreen = () => {
         script.onload = () =>{
             setSdkReady(true);
         }
+
         document.body.appendChild(script);
     };
     
@@ -70,6 +74,7 @@ const OrderScreen = () => {
   const successPaymentHandler = (paymenrResult) => {
     dispatch(payOrder(orderId, paymenrResult));
   }
+
   return loading ? <Loader /> : error ? <Message variant='danger'> {error} </Message> : 
   <>
     <h1>Order {order._id}</h1>
@@ -159,6 +164,7 @@ const OrderScreen = () => {
                             <Col>${order.totalPrice}</Col>
                         </Row>
                     </ListGroup.Item>
+
                     {!order.isPaid && (
                         <ListGroup.Item>
                             {loadingPay && <Loader />}
@@ -166,6 +172,7 @@ const OrderScreen = () => {
                             <PayPalButton amount = {order.totalPrice} onSuccess = {successPaymentHandler}></PayPalButton>}
                         </ListGroup.Item>
                     )}
+
                     <ListGroup.Item>
                         {error && <Message variant='danger'> {error}</Message>}
                     </ListGroup.Item>
