@@ -1,10 +1,11 @@
 import { createStore, combineReducers, applyMiddleware} from 'redux';
 import thunk from "redux-thunk";
-import {productListReducer, productDetailsReducer} from "./reducers/productReducers.js";
+import { productUpdateReducer, productListReducer, productDetailsReducer, productDeleteReducer, productCreateReducer} from "./reducers/productReducers.js";
 import { cartReducer } from './reducers/cartReducers.js';
 import { userLoginReducer, userDeleteReducer, userUpdateReducer ,userRegisterReducer, userDetailsReducer, userUpdateProfileReducer, userListReducer } from './reducers/userReducers.js';
 import {composeWithDevTools} from 'redux-devtools-extension';
-import { orderCreateReducer, orderDetailReducer, orderPayReducer, orderListMyReducer } from './reducers/orderReducers.js';
+import { orderDeliverReducer, orderCreateReducer, orderDetailReducer, orderPayReducer,orderListReducer, orderListMyReducer } from './reducers/orderReducers.js';
+
 
 const reducer =  combineReducers({
     productList : productListReducer,
@@ -21,6 +22,11 @@ const reducer =  combineReducers({
     userList: userListReducer,
     userDelete: userDeleteReducer,
     userUpdate: userUpdateReducer,
+    productDelete: productDeleteReducer,
+    productCreate: productCreateReducer,
+    productUpdate: productUpdateReducer,
+    orderList: orderListReducer,
+    orderDeliver: orderDeliverReducer
 });
 
 const cartItemsFromStorage = localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : []; 
