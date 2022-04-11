@@ -1,6 +1,6 @@
 import path from 'path';
 import express from 'express';
-// import dotenv from 'dotenv';
+import dotenv from 'dotenv';
 import connectDB from './config/db.js';
 import productRoutes from "./routes/productRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
@@ -11,7 +11,7 @@ import uploadRoutes from "./routes/uploadRoutes.js";
 
 import {Not_Found, Error_Handler} from "./middleware/errorMiddleware.js";
 
-// dotenv.config()
+dotenv.config()
 connectDB();
 
 const app = express();
@@ -48,10 +48,5 @@ app.use(Not_Found)
 app.use(Error_Handler);
 
 const PORT = process.env.REACT_APP_PORT || 4000;
-
-if(PORT === 4000)
-{
-
-}
 
 app.listen(PORT, console.log(`Server is in ${process.env.NODE_ENV} mode on ${PORT}`));
