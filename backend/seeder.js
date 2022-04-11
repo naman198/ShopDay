@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import dotenv from 'dotenv';
+// import dotenv from 'dotenv';
 
 import users from "./data/user.js";
 import products from "./data/products.js";
@@ -9,7 +9,7 @@ import Product from "./models/productModel.js";
 
 import connectDB from "./config/db.js";
 
-dotenv.config();
+// dotenv.config();
 
 connectDB();
 
