@@ -4,6 +4,8 @@ import {LinkContainer} from "react-router-bootstrap";
 import { Navbar, Nav, Container, NavDropdown } from 'react-bootstrap';
 import {logout} from '../actions/userActions';
 import { useNavigate } from 'react-router-dom';
+import SearchBox from './SearchBox';
+import { Route } from 'react-router-dom';
 
 const Header = () => {
   const navigate = useNavigate();
@@ -26,6 +28,7 @@ const Header = () => {
         
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
+          {/* <Route render={({history}) => <SearchBox history={history} />} /> */}
           <Nav className="justify-content-end" style={{ width: "100%" }}>
             <LinkContainer to = "/cart">
               <Nav.Link> <i className="fa fa-shopping-cart" /> &nbsp; cart</Nav.Link>
