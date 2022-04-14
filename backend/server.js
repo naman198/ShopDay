@@ -46,6 +46,6 @@ else{
 app.use(Not_Found)
 app.use(Error_Handler);
 
-const PORT = process.env.REACT_APP_PORT || 4000;
+const PORT = process.env.PORT || 4000;
 
 app.listen(PORT, console.log(`Server is in ${process.env.NODE_ENV} mode on ${PORT}`));
