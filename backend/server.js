@@ -1,7 +1,6 @@
 import path from 'path';
 import express from 'express';
-// import dotenv from 'dotenv';
-import 'dotenv/config'
+import dotenv from 'dotenv';
 import connectDB from './config/db.js';
 import productRoutes from "./routes/productRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
@@ -11,7 +10,9 @@ import uploadRoutes from "./routes/uploadRoutes.js";
 
 import {Not_Found, Error_Handler} from "./middleware/errorMiddleware.js";
 
-// dotenv.config()
+if (process.env.NODE_ENV !== 'production')
+    dotenv.config()
+
 connectDB();
 
 const app = express();
